@@ -6,57 +6,67 @@ struct Node {
     struct Node* next;
 };
 
-struct Node* front = NULL;
-struct Node* rear = NULL;
+struct Queue {
+    int size;
+    struct Node* front;
+    struct Node* back;
+};
+
+struct Queue obj;
 
 void enqueue(int value) {
     struct Node* newNode = malloc(sizeof(struct Node));
     newNode->data = value;
     newNode->next = NULL;
 
-    if (rear == NULL) { 
-        front = rear = newNode;
+    if (obj.back == NULL) {
+        obj.front = obj.back = newNode;
     } else {
-        rear->next = newNode;
-        rear = newNode;
+        obj.back->next = newNode;
+        obj.back = newNode;
     }
 
     printf("%d added to queue\n", value);
 }
 
 void dequeue() {
-    if (front == NULL) {
+    if (obj.front == NULL) {
         printf("Empty!\n");
         return;
     }
 
-    printf("%d removed\n", front->data);
-    struct Node* temp = front;
-    front = front->next;
+    struct Node* temp = obj.front;
+    obj.front = obj.front->next;
 
-    if (front == NULL)
-        rear = NULL;
+    if (obj.front == NULL)
+        obj.back = NULL;
 
     free(temp);
 }
 
-void showFront() {
-    if (front == NULL)
-        printf("Empty!\n");
-    else
-        printf("Front : %d\n", front->data);
+int showFront() {
+    return obj.front->data;
 }
 
+int showBack() {
+    return obj.back->data;
+}
 
 int main() {
+    obj.size = 0;
+    obj.front = NULL;
+    obj.back = NULL;
+
     enqueue(10);
     enqueue(20);
     enqueue(30);
 
-    showFront();
+    printf("front: %d\n",showFront());
+    printf("back: %d\n",showBack());
     dequeue();
-    showFront();
-
+    printf("front: %d\n",showFront());
+    printf("back: %d\n",showBack());
+    dequeue();
     return 0;
 }
 
