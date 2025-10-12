@@ -7,7 +7,7 @@ int main(int argc, char *argv[]) {
 
     float S = 0.5 * a * h;
 
-    printf("Traingle -  %f\n", S);
+    printf("Traingle area:  %f\n", S);
 
     return 0;
 }
