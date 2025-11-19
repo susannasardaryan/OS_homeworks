@@ -31,13 +31,13 @@ int main() {
 
     pid_t id = fork();
     if (id == 0) {
-        execl("./exercise21.c", "./exercise21.c", name, (char *)NULL);
+        execl("./exercise21", "./exercise21", NULL);
         perror("execl");
         _exit(1);
     }
 
     wait(NULL);
-    printf("Parent sees after child: %s\n", ptr);
+    printf("Parent after child: %s\n", ptr);
 
     munmap(ptr, size);
     close(fd);

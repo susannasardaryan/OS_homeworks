@@ -6,16 +6,10 @@
 #include <unistd.h>
 #include <string.h>
 
-int main(int argc, char *argv[]) {
-    if (argc < 2) {
-        fprintf(stderr, "Usage: %s <shm_name>\n", argv[0]);
-        return 1;
-    }
-
-    const char *name = argv[1];
+int main() {
     size_t size = 4096;
 
-    int fd = shm_open(name, O_RDWR, 0666);
+    int fd = shm_open("/my_shm", O_RDWR, 0666);
     if (fd == -1) {
         perror("shm_open (child)");
         return 1;
